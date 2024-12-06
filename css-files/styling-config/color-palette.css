@@ -13,6 +13,11 @@
     --accent-color: #5a5a5a;
 }
 
+body{
+    background-color: var(--background-color);
+}
+
+
 .background-primary{
     background-color: var(--primary-color);
 }
