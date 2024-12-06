@@ -1,0 +1,11 @@
+:root{
+    --border-radius-preset: 10px;
+    --border-width-preset: 3px;
+
+}
+
+.border-standard{
+    border-radius: var(--border-radius-preset);
+    border-style: solid;
+    border-width: var(--border-width-preset);
+}

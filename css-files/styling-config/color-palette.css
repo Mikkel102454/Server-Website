@@ -3,19 +3,44 @@
     --secondary-color: #1f9aff;
     --background-color: #01020e;
     --text-color: #ede8f1;
-
+    --accent-color: #303030;
 }
-
 .light-mode{
     --primary-color: #e6e8f6;
     --secondary-color: #007be0;
     --background-color: #f1f2fe;
     --text-color: #0b0d18;
-
+    --accent-color: #5a5a5a;
 }
 
-.button-ting{
+.background-primary{
+    background-color: var(--primary-color);
+}
+
+.border-secondary{
+    border-color: var(--secondary-color);
+}
+
+.text-color{
+    color: var(--text-color);
+}
+
+.border-primary{
+    border-color: var(--primary-color);
+}
+
+.border-accent{
+    border-color: var(--accent-color);
+}
+
+.background-secondary{
     background-color: var(--secondary-color);
-    height: 100px;
-    width: 100px;
+}
+
+.background-accent{
+    background-color: var(--accent-color);
+}
+
+.background-transparent{
+    background-color: transparent;
 }
