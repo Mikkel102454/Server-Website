@@ -37,6 +37,9 @@ body{
 .border-accent{
     border-color: var(--accent-color);
 }
+.border-transparent{
+    border-color: transparent;
+}
 
 .background-secondary{
     background-color: var(--secondary-color);

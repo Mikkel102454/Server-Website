@@ -8,4 +8,11 @@
     border-radius: var(--border-radius-preset);
     border-style: solid;
     border-width: var(--border-width-preset);
+    
+}
+.box-sizing{
+    box-sizing: border-box;
+}
+.border-empty{
+    border-radius: var(--border-radius-preset);
 }
