@@ -1,0 +1,21 @@
+.dark-mode{
+    --primary-color: #090a19;
+    --secondary-color: #1f9aff;
+    --background-color: #01020e;
+    --text-color: #ede8f1;
+
+}
+
+.light-mode{
+    --primary-color: #e6e8f6;
+    --secondary-color: #007be0;
+    --background-color: #f1f2fe;
+    --text-color: #0b0d18;
+
+}
+
+.button-ting{
+    background-color: var(--secondary-color);
+    height: 100px;
+    width: 100px;
+}
