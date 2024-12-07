@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Server Hosting</title>
     <link rel="stylesheet" href="/css-files/styling-config/color-palette.css">
     <link rel="stylesheet" href="/css-files/styling-config/size-presets.css">
     <link rel="stylesheet" href="/css-files/landing-page.css">
+    <script src="/js-files/general.js"></script>
+    <script src="/js-files/landing-page.js"></script>
 </head>
 <body class="dark-mode">
     <header class="background-primary">
         <ul>
-            <li class="text-color box-sizing border-standard border-accent background-secondary buton"><span>Settings</span></li>
-            <li class="text-color box-sizing border-standard border-accent background-secondary buton login-button"><span>Login</span></li>
+            <li class="text-color box-sizing border-standard border-accent background-secondary buton" onclick="ChangePage('/html-files/settings-page.html')"><span>Settings</span></li>
+            <li class="text-color box-sizing border-standard border-accent background-secondary buton login-button" onclick="ChangePage('/html-files/login-page.html')"><span>Login</span></li>
         </ul>
     </header>
 
 
     <main>
-        <div class="border-standard border-color content-card background-primary">
+        <div class="border-standard border-color content-card background-primary" onclick="ChangePage('/html-files/html-minecraft-hosting/minecraft-hosting-home.html')">
             <img class="border-empty" src="/img/minecraft-server-icon1.jpg">
             <div>
                 <h2 class="text-color">Minecraft Server Hosting</h2>
@@ -26,7 +28,7 @@
                 <img src="/img/computer-icon.png" class="border-empty background-transparent computer-icon">
             </div>
         </div>
-        <div class="content-card border-standard border-color background-primary">
+        <div class="content-card border-standard border-color background-primary" onclick="ChangePage('/html-files/html-minecraft-hosting/minecraft-hosting-home.html')">
             <img class="border-empty" src="/img/minecraft-server-icon1.jpg">
             <div>
                 <h2 class="text-color">Minecraft Server Hosting</h2>

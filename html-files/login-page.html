@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSM</title>
+    <title>Login Server Hosting</title>
     <link rel="stylesheet" type="text/css" href="/css-files/login-page.css" />
     <link rel="stylesheet" type="text/css" href="/css-files/styling-config/color-palette.css" />
     <link rel="stylesheet" type="text/css" href="/css-files/styling-config/size-presets.css" />
+    <script src="/js-files/general.js"></script>
+    <script src="/js-files/login-page.js"></script>
 </head>
 <body class="dark-mode">
     <div class="login background-primary border-standard border-transparent">
         <h3 class="text-color">Welcome!</h3>
         <input type="text" placeholder="Username*" class="border-standard border-accent text-color background-transparent"></input>
         <input type="password" placeholder="Password*" class="border-standard border-accent text-color background-transparent"></input>
-        <button class="background-secondary text-color">Login</button>
+        <button class="background-secondary text-color" onclick="OnLoginButtonClick()">Login</button>
         <p class="seperator text-color">or</p>
-        <button class="background-secondary text-color">Login with Google</button>
-        <p class="text-color">Don't have an account? <a href="signup-page.html" class="text-color">Signup</a></p>
+        <button class="background-secondary text-color" onclick="OnLoginGoogleButtonClick()">Login with Google</button>
+        <p class="text-color">Don't have an account? <a href="signup-page.html">Signup</a></p>
     </div>
 </body>
 </html>
