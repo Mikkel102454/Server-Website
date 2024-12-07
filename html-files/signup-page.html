@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSM</title>
+    <title>Signup Server Hosting</title>
     <link rel="stylesheet" type="text/css" href="/css-files/login-page.css" />
     <link rel="stylesheet" type="text/css" href="/css-files/styling-config/color-palette.css" />
     <link rel="stylesheet" type="text/css" href="/css-files/styling-config/size-presets.css" />
+    <script src="/js-files/general.js"></script>
+    <script src="/js-files/signup-page.js"></script>
 </head>
 <body class="dark-mode">
     <div class="login background-primary border-standard border-transparent">
@@ -14,10 +16,10 @@
         <input type="text" placeholder="Username*" class="border-standard border-accent text-color background-transparent"></input>
         <input type="email" placeholder="Email address*" class="border-standard border-accent text-color background-transparent"></input>
         <input type="password" placeholder="Password*" class="border-standard border-accent text-color background-transparent"></input>
-        <button class="background-secondary text-color">Signup</button>
+        <button class="background-secondary text-color" onclick="OnSignupButtonClick()">Signup</button>
         <p class="seperator text-color">or</p>
-        <button class="background-secondary text-color">Signup with Google</button>
-        <p class="text-color">Already have an account? <a href="login-page.html" class="text-color">Login</a></p>
+        <button class="background-secondary text-color" onclick="OnSignupGoogleButtonClick()">Signup with Google</button>
+        <p class="text-color">Already have an account? <a href="login-page.html">Login</a></p>
     </div>
 </body>
 </html>
