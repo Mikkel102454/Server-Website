@@ -6,6 +6,10 @@ app = Flask(__name__)
 @app.route('/')
 def GetIndexHTML():
     return send_from_directory("html-files", "landing-page.html")
+# Route to serve all HTML files
+@app.route('/html-files/<path:filename>')
+def GetHTMLFiles(filename):
+    return send_from_directory("html-files", filename)
 
 # Route to serve all CSS files
 @app.route('/css-files/<path:filename>')
@@ -24,23 +28,18 @@ def GetIMGFiles(filename):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-@app.route('/submit', methods=['POST'])
-def receive_data():
+from backend.account.account import CreateAccount
+@app.route('/exchange', methods=['POST'])
+def HandleExcahnge():
     data = request.json
-    print(f"Received from frontend: {data}")
-    return jsonify({"status": "success", "received": data})
+    if data.get('handleCode') is None:
+        return jsonify({"status": "failure", "exitCode": 400})
+    
+    match data.get('handleCode'):
+        case '101':
+            CreateAccount(data.get('username'), data.get('email'), data.get('password'))
 
 
+    return jsonify({"status": "failure", "exitCode": 500})
 if __name__ == '__main__':
     app.run(debug=True)
