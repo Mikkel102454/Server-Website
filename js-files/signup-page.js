@@ -1,3 +1,11 @@
+onload = function() {
+    token = this.sessionStorage.getItem('token');
+    console.log(token);
+    if(token != null){
+        ChangePage("/html-files/landing-page.html");
+    }
+}
+
 function OnSignupGoogleButtonClick(){
     console.log("Clicked signup with google button");
 }
@@ -14,5 +22,8 @@ async function OnSignupButtonClick(){
         body: JSON.stringify(data)
     });
     var data = await respone.json();
+    if (data.exitCode === 201) {
+        ChangePage("/html-files/login-page.html");
+    }
     console.log(data);
 }

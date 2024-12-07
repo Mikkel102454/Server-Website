@@ -1,9 +1,12 @@
 from flask import jsonify
 from backend.database.database import CheckValue
 from backend.database.database import InsertValue
+from backend.database.database import GetValue
 
 from backend.stdlib import hash256
 from backend.stdlib import GenerateUUID
+
+from backend.token import GenerateNewToken
 def CreateAccount(username, email, password):
     try:
         reponse = {'usernameTaken': 0, 'emailTaken': 0, 'exitCode': 0, 'status' : "failure"}
@@ -32,4 +35,19 @@ def CreateAccount(username, email, password):
         return reponse
     except Exception as e:
         print(f"Error while creating account: {e}")
-        return {"status": "failure", "exitCode:": 500}
+        return {"status": "failure", "exitCode": 500}
+    
+def AccessAccount(username, password):
+    if(CheckValue("users", "username", username) == 0):
+        return {"status": "failure", "exitCode": 401, "invalidMail": 1}
+    uuid = GetUUIDFromUsername(username)
+    password = hash256(password, 16)
+    if(GetValue('users', 'password', 'username', username) == password):
+        token = GenerateNewToken(uuid)
+        return {"status": "sucsess", "exitCode": 200, "token": token}
+    return {"status": "failure", "exitCode": 401, "invalidPassword": 1}
+
+
+
+def GetUUIDFromUsername(username):
+    return GetValue('users', 'uuid', 'username', username)

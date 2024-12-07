@@ -1,4 +1,4 @@
-from flask import Flask, send_file, jsonify, request, send_from_directory
+from flask import Flask, send_file, jsonify, request, send_from_directory, make_response
 
 app = Flask(__name__)
 
@@ -27,21 +27,33 @@ def GetIMGFiles(filename):
     return send_from_directory("img", filename)
 
 
-
+from backend.token import VerifyToken
 from backend.account.account import CreateAccount
+from backend.account.account import AccessAccount
 @app.route('/exchange', methods=['POST'])
 def HandleExcahnge():
     data = request.json
     if data.get('handleCode') is None:
         return jsonify({"status": "failure", "exitCode": 400})
     
-    match data.get('handleCode'):
-        case 101:
-            return jsonify(CreateAccount(data.get('username'), data.get('email'), data.get('password')))
-            
-            
+    
+    # Dosnt require login token
+    try:
+        match data.get('handleCode'):
+            case 101:
+                return jsonify(CreateAccount(data.get('username'), data.get('email'), data.get('password')))
+            case 102:
+                return jsonify(AccessAccount(data.get('username'), data.get('password')))
+    except Exception as e:
+        print(e)
+    
 
-
+    # Require token
+    token = data.get('token')
+    if(VerifyToken(token) == 1):
+        _#match data.get('handleCode'):
+    else:
+        return jsonify({"status": "failure", "exitCode": 401})
     return jsonify({"status": "failure", "exitCode": 500})
 if __name__ == '__main__':
     app.run(debug=True)

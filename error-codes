@@ -1,6 +1,8 @@
+200 = OK
 201 = Created
 
 400 = Bad Request
+401 = Unathorized
 409 = Conflict
 
 500 = Internal Server Error
@@ -9,3 +11,6 @@
 
 Exchange Codes:
     101 = Create user account
+    102 = Login to user account
+
+    109 = Get uset token

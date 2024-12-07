@@ -21,6 +21,8 @@ def InsertValue(table, names, values):
     except Exception as e:
         print (f"Error while inserting value: {e}")
         return 1
+    finally:
+        mycursor.close()
 def DeleteValue(table, name, values):
     try:
         mycursor = db.cursor()
@@ -32,6 +34,8 @@ def DeleteValue(table, name, values):
     except Exception as e:
         print (f"Error while deleting value: {e}")
         return 1
+    finally:
+        mycursor.close()
 def CheckValue(table, names, values):
     try:
         mycursor = db.cursor()
@@ -46,4 +50,20 @@ def CheckValue(table, names, values):
     except Exception as e:
         print (f"Error while checking value: {e}")
         return 1
+    finally:
+        mycursor.close()
+def GetValue(table, name, reqName, reqValue):
+    try:
+        mycursor = db.cursor()
+        sql = f"SELECT {name} FROM {table} WHERE {reqName} = %s LIMIT 1"
+        mycursor.execute(sql, (reqValue,))
+        result = mycursor.fetchone()
 
+        if result:
+            return result[0]
+        return None
+    except Exception as e:
+        print(f"Error in GetValue: {e}")
+        return None
+    finally:
+        mycursor.close()
