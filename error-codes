@@ -1,0 +1,11 @@
+201 = Created
+
+400 = Bad Request
+409 = Conflict
+
+500 = Internal Server Error
+
+
+
+Exchange Codes:
+    101 = Create user account
