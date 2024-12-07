@@ -77,3 +77,8 @@ main .content-card:hover{
     transform: scale(1.05);
     cursor: pointer;
 }
+
+.computer-icon{
+    filter:invert();
+    scale: 0.5;
+}
