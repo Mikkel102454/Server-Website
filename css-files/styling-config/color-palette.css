@@ -4,6 +4,7 @@
     --background-color: #01020e;
     --text-color: #ede8f1;
     --accent-color: #303030;
+    --border-color: #303030;
 }
 .light-mode{
     --primary-color: #e6e8f6;
@@ -11,6 +12,7 @@
     --background-color: #f1f2fe;
     --text-color: #0b0d18;
     --accent-color: #5a5a5a;
+    --border-color: #007be0;
 }
 
 body{
@@ -51,4 +53,8 @@ body{
 
 .background-transparent{
     background-color: transparent;
+}
+
+.border-color{
+    border-color: var(--border-color);
 }
