@@ -6,21 +6,17 @@ from backend.stdlib import hash256
 from backend.stdlib import GenerateUUID
 def CreateAccount(username, email, password):
     try:
-        reponse = {}
+        reponse = {'usernameTaken': 0, 'emailTaken': 0, 'exitCode': 0, 'status' : "failure"}
         # Checks mail and username
         if(CheckValue("users", "username", username) != 0):
-            print("usernmae already exists")
+            print("username already exists")
             reponse['usernameTaken'] = 1
-            reponse['exitCode'] = 409
-            reponse['status'] = "failure"
         if(CheckValue("users", "email", email) != 0):
             print("email already exists")
             reponse['emailTaken'] = 1
-            reponse['exitCode'] = 409
-            reponse['status'] = "failure"
 
-
-        if(reponse['usernameTaken'] != 1 and reponse['emailTaken']):
+        
+        if(reponse['usernameTaken'] == 0 and reponse['emailTaken'] == 0):
             # Hahes password 256 x 10
             password = hash256(password, 16)
             # Create UUID
@@ -30,6 +26,10 @@ def CreateAccount(username, email, password):
             #return
             reponse['exitCode'] = 201
             reponse['status'] = "sucsess"
+        else:
+            reponse['exitCode'] = 409
+            reponse['status'] = "failure"
         return reponse
-    except:
+    except Exception as e:
+        print(f"Error while creating account: {e}")
         return {"status": "failure", "exitCode:": 500}

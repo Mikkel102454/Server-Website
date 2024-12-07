@@ -3,15 +3,18 @@ import mysql.connector
 db = mysql.connector.connect(
   host="localhost",
   user="root",
-  password=""
+  password="",
+  database="hosting"
 )
 
 
 def InsertValue(table, names, values):
     try:
         mycursor = db.cursor()
-        sql = f"INSERT INTO {table} ({names}) VALUES (%s, %s)"
-        mycursor.execute(sql, values)
+        columns = ", ".join(names)
+        placeholders = ", ".join(["%s"] * len(values))
+        sql = f"INSERT INTO {table} ({columns}) VALUES ({placeholders})"
+        mycursor.execute(sql, tuple(values))
         db.commit()
         mycursor.close()
         return 0
@@ -21,8 +24,8 @@ def InsertValue(table, names, values):
 def DeleteValue(table, name, values):
     try:
         mycursor = db.cursor()
-        sql = f"DELETE FROM {table} WHERE{name} = '%s'"
-        mycursor.execute(sql, values)
+        sql = f"DELETE FROM {table} WHERE{name} = %s"
+        mycursor.execute(sql, (values,))
         db.commit()
         mycursor.close()
         return 0
@@ -32,14 +35,15 @@ def DeleteValue(table, name, values):
 def CheckValue(table, names, values):
     try:
         mycursor = db.cursor()
-        sql = f"SELECT {names} FROM {table} WHERE {name} = '%s' LIMIT 1"
-        mycursor.execute(sql, values)
-        if(mycursor.rowcount > 0):
+        sql = f"SELECT {names} FROM {table} WHERE {names} = %s LIMIT 1"
+        mycursor.execute(sql, (values,))
+        result = mycursor.fetchone()
+        if(result):
             mycursor.close()
             return 1
         mycursor.close()
         return 0
     except Exception as e:
-        print (f"Error while deleting value: {e}")
+        print (f"Error while checking value: {e}")
         return 1
 
