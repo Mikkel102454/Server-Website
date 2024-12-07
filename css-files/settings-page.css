@@ -1,20 +1,37 @@
 body{
+    margin: 0px;
+}
+
+.main-window{
     display: flex;
     justify-content: left;
-
     margin: 0px;
 }
 
 main{
     margin: 0px;
-    height: 100vh;
+    height: 94vh;
     width: 85vw;
 }
 
 nav{
     margin: 0px;
-    height: 100vh;
+    height: 94vh;
     width: 15vw;
+}
+
+header{
+    display: flex;
+    margin: 0px;
+    height: 6vh;
+    width: 100vw;
+    align-items: center;
+}
+
+.home-button{
+    height: 4vh;
+    width: 4vh;
+    margin-left: 10px;
 }
 
 nav ul{
