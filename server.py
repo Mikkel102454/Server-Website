@@ -27,9 +27,8 @@ def GetIMGFiles(filename):
     return send_from_directory("img", filename)
 
 
-from backend.token import VerifyToken
-from backend.account.account import CreateAccount
-from backend.account.account import AccessAccount
+from backend.token import VerifyToken, RefreshToken
+from backend.account.account import CreateAccount, AccessAccount
 @app.route('/exchange', methods=['POST'])
 def HandleExcahnge():
     data = request.json
@@ -46,14 +45,28 @@ def HandleExcahnge():
                 return jsonify(AccessAccount(data.get('username'), data.get('password')))
     except Exception as e:
         print(e)
-    
+        return jsonify({"status": "failure", "exitCode": 500})
 
     # Require token
-    token = data.get('token')
-    if(VerifyToken(token) == 1):
-        _#match data.get('handleCode'):
-    else:
-        return jsonify({"status": "failure", "exitCode": 401})
-    return jsonify({"status": "failure", "exitCode": 500})
+    try:
+        token = data.get('token')
+        generatedNewToken = 0
+        if(VerifyToken(token) == 1):
+            #refresh token
+            newToken = RefreshToken(token)
+            if(newToken == None):
+                return jsonify({"status": "failure", "exitCode": 512})
+            token = newToken
+            generatedNewToken = 1
+        if(VerifyToken(token) == 0):
+            _#match data.get('handleCode'):
+            if(generatedNewToken == 1):
+                return jsonify({**response, "newToken": token})
+            return jsonify(response)
+        else:
+            return jsonify({"status": "failure", "exitCode": 401})
+    except Exception as e:
+        print(e)
+        return jsonify({"status": "failure", "exitCode": 500})
 if __name__ == '__main__':
     app.run(debug=True)

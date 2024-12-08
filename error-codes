@@ -6,7 +6,7 @@
 409 = Conflict
 
 500 = Internal Server Error
-
+512 = Invalid Token(Logout)
 
 
 Exchange Codes:

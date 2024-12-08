@@ -17,12 +17,8 @@ async function OnLoginButtonClick(){
     var password = document.getElementById("password-input").value.trim();
 
     var data = {"handleCode": 102, "username": username, "password": password};
-    var response = await fetch("http://127.0.0.1:5000/exchange", {
-        method: "POST",
-        headers: {'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    });
-    var data = await response.json();
+    data = ExchangeServer(data)
+    
     if(data.exitCode === 200){
         sessionStorage.setItem("token", data.token);
         ChangePage("/html-files/landing-page.html");

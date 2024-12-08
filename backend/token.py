@@ -9,6 +9,7 @@ def GenerateNewToken(uuid):
         "username": GetValue('users', 'username', 'uuid', uuid),
         "email": GetValue('users', 'email', 'uuid', uuid),
         "authority": GetValue('users', 'authority', 'uuid', uuid),
+        "iat": datetime.datetime.utcnow(),
         "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1)
     }
     return jwt.encode(payload, secretKey, algorithm="HS256")
@@ -23,5 +24,20 @@ def VerifyToken(token):
     except jwt.InvalidTokenError:
         return 1
 def DecodeToken(token):
-    return jwt.decode(token, options={"verify_signature": False})
+    return jwt.decode(token, options={"verify_exp": False})
+
+def RefreshToken(token):
+    try:
+        payload = jwt.decode(token, secretKey, algorithms=["HS256"], options={"verify_exp": False})
+        new_payload = {
+            "userUUID": payload["userUUID"],
+            "username": payload["username"],
+            "email": payload["email"],
+            "authority": payload["authority"],
+            "iat": datetime.datetime.utcnow(),
+            "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+        }
+        return jwt.encode(new_payload, secretKey, algorithm="HS256")
+    except:
+        return None
     
