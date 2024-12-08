@@ -4,7 +4,12 @@ var main
 window.addEventListener("load", function () {
     current = document.getElementById("appearance-li");
     current.classList.add("selected");
-    secondaryColor = getComputedStyle(document.querySelector('.dark-mode')).getPropertyValue('--secondary-color');
+    try{
+        secondaryColor = getComputedStyle(document.querySelector('.dark-mode')).getPropertyValue('--secondary-color');
+    }
+    catch(e){
+        secondaryColor = getComputedStyle(document.querySelector('.light-mode')).getPropertyValue('--secondary-color');
+    }
     current.style.backgroundColor = (secondaryColor);
     LoadTemplate("appearance-settings-template", "main");
     
@@ -18,4 +23,5 @@ function LiSettingsButton(id, idTemplate, idParent){
     li.classList.add("selected");
     current = li;
     LoadTemplate(idTemplate, idParent);
+
 }

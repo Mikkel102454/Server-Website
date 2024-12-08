@@ -139,12 +139,16 @@ main .settings-div{
 
 }
 
+.switch:hover{
+    cursor: pointer;
+}
+
 .switch::before{
     content: "";
     position: absolute;
     width: 33%;
     height: 66%;
-    background-color: blue;
+    background-color: rgb(34, 34, 197);
     border-radius: 50%;
     transition: 0.4s;
     left: 5px;
@@ -152,7 +156,7 @@ main .settings-div{
 }
 
 .check:checked + .switch{
-    background-color: lightblue;
+    background-color: rgb(138, 214, 240);
 }
 
 .check:checked + .switch::before{
