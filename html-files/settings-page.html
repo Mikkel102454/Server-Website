@@ -11,7 +11,7 @@
     <script src="/js-files/settings-page.js"></script>
 </head>
 <body class="dark-mode">
-    <header class="background-secondary">
+    <header class="background-primary">
         <img src="/img/home.png" class="home-button" onclick="ChangePage('/html-files/landing-page.html')">
     </header>
     <div class="main-window">
@@ -47,13 +47,17 @@
                 </li>
             </ul>
         </nav>
-        <main class="background-primary">
-            <p class="text-color top-item big-font">Appearance</p>
-            <div>
-                <input type="checkbox">
-                <p class="text-color">Toggle Dark Mode</p>
-            </div>
+        <main class="background-color" id="main">
         </main>
     </div>
 </body>
+<template id="appearance-settings-template">
+    <p class="text-color top-item big-font">Appearance</p>
+    <div class="background-primary settings-div border-standard border-color">
+        <div class="settings-container">
+            <p class="text-color">Toggle Dark Mode</p>
+            <input type="checkbox">
+        </div>
+    </div>
+</template>
 </html>

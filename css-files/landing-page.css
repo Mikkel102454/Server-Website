@@ -80,7 +80,11 @@ main .content-card:hover{
     cursor: pointer;
 }
 
-.computer-icon{
+.light-mode .computer-icon{
+    scale: 0.5;
+}
+
+.dark-mode .computer-icon{
     filter:invert();
     scale: 0.5;
 }
