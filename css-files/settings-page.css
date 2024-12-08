@@ -30,14 +30,13 @@ main .top-item{
 main .big-font{
     font-size: 50px;
     font-weight: bold;
-    text-decoration: underline;
 }
 
 main .settings-div .settings-container input{
     height: 25px;
     width: 25px;
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: 10px;
     
 }
 
@@ -125,4 +124,41 @@ main .settings-div{
     height: 70vh;
     width: 30vw;
     border-radius: 20px !important;
+}
+
+.switch{
+    background-color: var(--background-color);
+    margin: 0px;
+    margin-right: 10px;
+    margin-left: auto;
+    padding: 0px;
+    height: 30px;
+    width: 60px;
+    border-radius: 30px;
+    position: relative !important;
+
+}
+
+.switch::before{
+    content: "";
+    position: absolute;
+    width: 33%;
+    height: 66%;
+    background-color: blue;
+    border-radius: 50%;
+    transition: 0.4s;
+    left: 5px;
+    top: 17%;
+}
+
+.check:checked + .switch{
+    background-color: lightblue;
+}
+
+.check:checked + .switch::before{
+    left: calc(100% - 25px);
+}
+
+.check{
+    display: none;
 }

@@ -17,12 +17,5 @@ function LiSettingsButton(id, idTemplate, idParent){
     li.style.backgroundColor = (secondaryColor);
     li.classList.add("selected");
     current = li;
-
-}
-
-function LoadTemplate(idTemplate, idParent){
-    main = document.getElementById(idParent);
-    var template = document.getElementById(idTemplate);
-    var clone = template.content.cloneNode(true);
-    main.appendChild(clone);
+    LoadTemplate(idTemplate, idParent);
 }

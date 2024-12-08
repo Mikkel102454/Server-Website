@@ -11,38 +11,38 @@
     <script src="/js-files/general.js"></script>
     <script src="/js-files/settings-page.js"></script>
 </head>
-<body class="dark-mode">
+<body class="light-mode">
     <header class="background-primary">
         <img src="/img/home.png" class="home-button" onclick="ChangePage('/html-files/landing-page.html')">
     </header>
     <div class="main-window">
         <nav class="background-accent">
             <ul>
-                <li class="text-color" onclick="LiSettingsButton('appearance-li')" id="appearance-li">
+                <li class="text-color" onclick="LiSettingsButton('appearance-li', 'appearance-settings-template', 'main')" id="appearance-li">
                     <img src="/img/computer-icon.png">
                     <p>Appearance</p>
                 </li>
-                <li class="text-color" onclick="LiSettingsButton('security-li')" id="security-li">
+                <li class="text-color" onclick="LiSettingsButton('security-li', 'security-settings-template', 'main')" id="security-li">
                     <img src="/img/computer-icon.png">
                     <p>Security</p>
                 </li>
-                <li class="text-color" onclick="LiSettingsButton('privacy-li')" id="privacy-li">
+                <li class="text-color" onclick="LiSettingsButton('privacy-li', 'privacy-settings-template', 'main')" id="privacy-li">
                     <img src="/img/computer-icon.png">
                     <p>Privacy</p>
                 </li>
-                <li class="text-color" onclick="LiSettingsButton('general-li')" id="general-li">
+                <li class="text-color" onclick="LiSettingsButton('general-li', 'general-settings-template', 'main')" id="general-li">
                     <img src="/img/computer-icon.png">
                     <p>General</p>
                 </li>
-                <li class="text-color" onclick="LiSettingsButton('on-startup-li')" id="on-startup-li">
+                <li class="text-color" onclick="LiSettingsButton('on-startup-li', 'startup-settings-template', 'main')" id="on-startup-li">
                     <img src="/img/computer-icon.png">
                     <p>On Startup</p>
                 </li>
-                <li class="text-color" onclick="LiSettingsButton('languages-li')" id="languages-li">
+                <li class="text-color" onclick="LiSettingsButton('languages-li', 'languages-settings-template', 'main')" id="languages-li">
                     <img src="/img/computer-icon.png">
                     <p>Languages</p>
                 </li>
-                <li class="text-color" onclick="LiSettingsButton('reset-settings-li')" id="reset-settings-li">
+                <li class="text-color" onclick="LiSettingsButton('reset-settings-li', 'reset-settings-template', 'main')" id="reset-settings-li">
                     <img src="/img/computer-icon.png">
                     <p>Reset Settings</p>
                 </li>
@@ -54,6 +54,62 @@
 </body>
 <template id="appearance-settings-template">
     <p class="text-color top-item big-font">Appearance</p>
+    <div class="background-primary settings-div border-standard border-color">
+        <div class="settings-container">
+            <p class="text-color">Toggle Dark Mode</p>
+            <input type="checkbox" id="check" class="check">
+            <label for="check" class="switch"></label>
+
+        </div>
+    </div>
+</template>
+<template id="security-settings-template">
+    <p class="text-color top-item big-font">Security</p>
+    <div class="background-primary settings-div border-standard border-color">
+        <div class="settings-container">
+            <p class="text-color">Toggle Dark Mode</p>
+            <input type="checkbox">
+        </div>
+    </div>
+</template>
+<template id="privacy-settings-template">
+    <p class="text-color top-item big-font">Privacy</p>
+    <div class="background-primary settings-div border-standard border-color">
+        <div class="settings-container">
+            <p class="text-color">Toggle Dark Mode</p>
+            <input type="checkbox">
+        </div>
+    </div>
+</template>
+<template id="general-settings-template">
+    <p class="text-color top-item big-font">General</p>
+    <div class="background-primary settings-div border-standard border-color">
+        <div class="settings-container">
+            <p class="text-color">Toggle Dark Mode</p>
+            <input type="checkbox">
+        </div>
+    </div>
+</template>
+<template id="startup-settings-template">
+    <p class="text-color top-item big-font">Startup</p>
+    <div class="background-primary settings-div border-standard border-color">
+        <div class="settings-container">
+            <p class="text-color">Toggle Dark Mode</p>
+            <input type="checkbox">
+        </div>
+    </div>
+</template>
+<template id="languages-settings-template">
+    <p class="text-color top-item big-font">Languages</p>
+    <div class="background-primary settings-div border-standard border-color">
+        <div class="settings-container">
+            <p class="text-color">Toggle Dark Mode</p>
+            <input type="checkbox">
+        </div>
+    </div>
+</template>
+<template id="reset-settings-template">
+    <p class="text-color top-item big-font">Reset Settings</p>
     <div class="background-primary settings-div border-standard border-color">
         <div class="settings-container">
             <p class="text-color">Toggle Dark Mode</p>
