@@ -1,10 +1,11 @@
 
-onload = function() {
-    console.log('onload');
+window.addEventListener("load", function () {
     if(isLoggedIn) {
         ChangePage("/html-files/landing-page.html");
     }
-}
+})
+
+
 function OnLoginGoogleButtonClick(){
     console.log("Clicked login with google button");
 }
@@ -18,7 +19,7 @@ async function OnLoginButtonClick(){
     response = await ExchangeServer(data);
 
     if(response.exitCode === 200){
-        document.cookie = `token=${response.token}; path=/; secure; samesite=strict`;
+        SetToken(response.token);
         ChangePage("/html-files/landing-page.html");
     }
     if(response.exitCode === 401){
