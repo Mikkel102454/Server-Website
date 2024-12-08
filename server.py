@@ -39,9 +39,9 @@ def HandleExcahnge():
     # Dosnt require login token
     try:
         match data.get('handleCode'):
-            case 101:
+            case 101: # Create new account
                 return jsonify(CreateAccount(data.get('username'), data.get('email'), data.get('password')))
-            case 102:
+            case 102: # Login to account
                 return jsonify(AccessAccount(data.get('username'), data.get('password')))
     except Exception as e:
         print(e)
@@ -49,22 +49,25 @@ def HandleExcahnge():
 
     # Require token
     try:
-        token = data.get('token')
-        generatedNewToken = 0
-        if(VerifyToken(token) == 1):
-            #refresh token
-            newToken = RefreshToken(token)
-            if(newToken == None):
-                return jsonify({"status": "failure", "exitCode": 512})
-            token = newToken
-            generatedNewToken = 1
-        if(VerifyToken(token) == 0):
-            _#match data.get('handleCode'):
-            if(generatedNewToken == 1):
-                return jsonify({**response, "newToken": token})
-            return jsonify(response)
-        else:
-            return jsonify({"status": "failure", "exitCode": 401})
+        if(data.get('token')):
+            token = data.get('token')
+            generatedNewToken = 0
+            if(VerifyToken(token) == 1):
+                #refresh token
+                newToken = RefreshToken(token)
+                if(newToken == None):
+                    return jsonify({"status": "failure", "exitCode": 512})
+                token = newToken
+                generatedNewToken = 1
+
+
+            if(VerifyToken(token) == 0):
+                _#match data.get('handleCode'):
+                if(generatedNewToken == 1):
+                    return jsonify({**response, "newToken": token})
+                return jsonify(response)
+            else:
+                return jsonify({"status": "failure", "exitCode": 401})
     except Exception as e:
         print(e)
         return jsonify({"status": "failure", "exitCode": 500})

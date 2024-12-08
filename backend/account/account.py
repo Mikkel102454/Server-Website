@@ -39,13 +39,13 @@ def CreateAccount(username, email, password):
     
 def AccessAccount(username, password):
     if(CheckValue("users", "username", username) == 0):
-        return {"status": "failure", "exitCode": 401, "invalidMail": 1}
+        return {"status": "failure", "exitCode": 401}
     uuid = GetUUIDFromUsername(username)
     password = hash256(password, 16)
-    if(GetValue('users', 'password', 'username', username) == password):
+    if(GetValue('users', 'password', 'uuid', uuid) == password):
         token = GenerateNewToken(uuid)
         return {"status": "sucsess", "exitCode": 200, "token": token}
-    return {"status": "failure", "exitCode": 401, "invalidPassword": 1}
+    return {"status": "failure", "exitCode": 401}
 
 
 

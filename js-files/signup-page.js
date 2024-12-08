@@ -1,5 +1,5 @@
 onload = function() {
-    token = this.sessionStorage.getItem('token');
+    var token = this.sessionStorage.getItem('token');
     console.log(token);
     if(token != null){
         ChangePage("/html-files/landing-page.html");
@@ -16,9 +16,19 @@ async function OnSignupButtonClick(){
     var password = document.getElementById("password-input").value.trim();
 
     var data = {"handleCode": 101, "username": username, "email": email, "password": password};
-    data = ExchangeServer(data)
-    if (data.exitCode === 201) {
+    response = await ExchangeServer(data);
+    if (response.exitCode === 201) {
         ChangePage("/html-files/login-page.html");
     }
-    console.log(data);
+
+    // ERRORS
+    if (response.exitCode === 409){
+        if(response.usernameTaken){
+            // Username already in use
+        }
+        if (response.emailTaken){
+            // Email already in use
+        }
+    }
+    console.log(response);
 }

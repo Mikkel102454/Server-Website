@@ -17,11 +17,14 @@ async function OnLoginButtonClick(){
     var password = document.getElementById("password-input").value.trim();
 
     var data = {"handleCode": 102, "username": username, "password": password};
-    data = ExchangeServer(data)
-    
-    if(data.exitCode === 200){
-        sessionStorage.setItem("token", data.token);
+    response = await ExchangeServer(data);
+
+    if(response.exitCode === 200){
+        sessionStorage.setItem("token", response.token);
         ChangePage("/html-files/landing-page.html");
     }
-    console.log(data);
+    if(response.exitCode === 401){
+        // Username or Password is invalid
+    }
+    console.log(response);
 }
