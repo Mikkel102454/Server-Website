@@ -25,10 +25,11 @@ async function OnSignupButtonClick(){
     if (response.exitCode === 409){
         if(response.usernameTaken){
             // Username already in use
+            console.error("Username already in use");
         }
         if (response.emailTaken){
             // Email already in use
+            console.error("Email already in use");
         }
     }
-    console.log(response);
 }

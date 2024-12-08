@@ -1,9 +1,7 @@
 
 onload = function() {
-    token = this.sessionStorage.getItem('token');
-    console.log(token);
-    if(token != null){
-
+    console.log('onload');
+    if(isLoggedIn) {
         ChangePage("/html-files/landing-page.html");
     }
 }
@@ -20,11 +18,11 @@ async function OnLoginButtonClick(){
     response = await ExchangeServer(data);
 
     if(response.exitCode === 200){
-        sessionStorage.setItem("token", response.token);
+        document.cookie = `token=${response.token}; path=/; secure; samesite=strict`;
         ChangePage("/html-files/landing-page.html");
     }
     if(response.exitCode === 401){
         // Username or Password is invalid
+        console.error("Username or Password is invalid");
     }
-    console.log(response);
 }
