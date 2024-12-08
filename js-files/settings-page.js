@@ -1,14 +1,14 @@
 var current;
 var secondaryColor;
 var main
-onload = function(){
+window.addEventListener("load", function () {
     current = document.getElementById("appearance-li");
     current.classList.add("selected");
     secondaryColor = getComputedStyle(document.querySelector('.dark-mode')).getPropertyValue('--secondary-color');
     current.style.backgroundColor = (secondaryColor);
     LoadTemplate("appearance-settings-template", "main");
     
-}
+})
 
 function LiSettingsButton(id, idTemplate, idParent){
     current.classList.remove("selected");

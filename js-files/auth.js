@@ -1,23 +1,16 @@
-
-
 var token = null;
 var isLoggedIn = false;
 
-window.onload = function() {
+window.addEventListener("load", function () {
     try {
         token = GetToken();
-    
         if(token){
             isLoggedIn = true;
         }
     } catch (e) {
         console.log(e);
     }
-
-    console.log("LOADING");
-    console.log(token);
-    console.log(isLoggedIn);
-}
+})
 
 async function ExchangeServer(request){
     console.log(request);
@@ -29,43 +22,37 @@ async function ExchangeServer(request){
     var data = await response.json();
 
     if(data.newToken) {
-        document.cookie = `token=${data.newToken}; path=/; secure; samesite=strict`;
+        SetToken(data.newToken);
         token = data.newToken;
     }
     console.log(data);
     return data;
 }
 
+function SetToken(token) {
+    const maxAge = 10 * 365 * 24 * 60 * 60; // Approx. 10 years 
+    document.cookie = `token=${token}; path=/; secure; samesite=strict; max-age=${maxAge}`;
+}
+
+class userData {
+    constructor(username, email, uuid, authority) {
+        this.username = username;
+        this.email = email;
+        this.uuid = uuid;
+        this.authority = authority;
+    }
+}
 
 function GetToken() {
-    const cookies = document.cookie.split(';');
-
-    for (const cookie of cookies) {
-        const [name, value] = cookie.trim().split('=');
-        if (name === 'token') {
-            return value;
-        }
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; token=`);
+    if (parts.length === 2) {
+        return parts.pop().split(';').shift();
     }
-
     return null;
 }
-function GetEmail(){
+function GetUserData(){
     if(!isLoggedIn){return null;}
     var decoded = jwtDecode(token);
-    return decoded.email
-}
-function GetUsername(){
-    if(!isLoggedIn){return null;}
-    var decoded = jwtDecode(token);
-    return decoded.username
-}
-function GetUUID(){
-    if(!isLoggedIn){return null;}
-    var decoded = jwtDecode(token);
-    return decoded.userUUID
-}
-function GetAuthority(){
-    if(!isLoggedIn){return null;}
-    var decoded = jwtDecode(token);
-    return decoded.authority
+    return new userData(decoded.username, decoded.email, decoded.userUUID, decoded.authority)
 }
