@@ -26,8 +26,8 @@ def GetJSFiles(filename):
 def GetIMGFiles(filename):
     return send_from_directory("img", filename)
 
-
 from backend.token import VerifyToken, RefreshToken
+print("Importing")
 from backend.account.account import CreateAccount, AccessAccount
 @app.route('/exchange', methods=['POST'])
 def HandleExcahnge():

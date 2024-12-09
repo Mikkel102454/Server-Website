@@ -1,5 +1,3 @@
-
-
 import hashlib
 def hash256(data, times):
     sha256_hash = data
