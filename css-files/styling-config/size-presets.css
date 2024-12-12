@@ -16,3 +16,22 @@
 .border-empty{
     border-radius: var(--border-radius-preset);
 }
+
+.home-button:hover{
+    transition: 0.2s;
+    scale: 1.05;
+    cursor: pointer;
+}
+
+.home-button{
+    transition: 0.2s;
+    height: 4vh;
+    width: 4vh;
+    margin-left: 25px;
+    background-color: var(--secondary-color);
+    padding: 7px 20px;
+    border-radius: 5px;
+
+}
+
+

@@ -51,25 +51,6 @@ nav{
     z-index: 10;
 }
 
-header{
-    display: flex;
-    margin: 0px;
-    height: 7vh;
-    width: 100vw;
-    align-items: center;
-}
-
-.home-button{
-    transition: 0.2s;
-    height: 4vh;
-    width: 4vh;
-    margin-left: 25px;
-    background-color: var(--secondary-color);
-    padding: 7px 20px;
-    border-radius: 5px;
-
-}
-
 nav ul{
     padding: 0px;
 }
@@ -89,12 +70,6 @@ nav li{
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     min-height: 50px;
-}
-
-.home-button:hover{
-    transition: 0.2s;
-    scale: 1.05;
-    cursor: pointer;
 }
 
 nav li:hover{
@@ -165,4 +140,12 @@ main .settings-div{
 
 .check{
     display: none;
+}
+
+header{
+    display: flex;
+    margin: 0px;
+    height: 7vh;
+    width: 100vw;
+    align-items: center;
 }
