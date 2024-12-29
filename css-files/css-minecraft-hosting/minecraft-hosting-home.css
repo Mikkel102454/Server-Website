@@ -1,5 +1,6 @@
 body{
     margin: 0px;
+    padding: 0px;
 }
 main {
     width: 100vw;
@@ -64,7 +65,7 @@ main ul {
 
 header{
     display: flex;
-    margin: 0px 0px 0px 0px;
+    margin: 0px !important;
     height: 7vh;
     width: 100vw;
     align-items: center;
