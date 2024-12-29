@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/css-files/styling-config/size-presets.css">
     <link rel="stylesheet" href="/css-files/css-minecraft-hosting/generic-minecraft-server.css">
     <script src="/js-files/auth.js"></script>
-    <script src="/js-files/general.js"></script>    
+    <script src="/js-files/general.js"></script>   
+    <script src="/js-files/js-minecraft-hosting/generic-minecraft-server.js"></script> 
 </head>
 <body class="dark-mode background-color">
     <header class="background-primary">
@@ -16,11 +17,143 @@
     </header>
     <div class="main-window">
         <nav class="background-accent">
-
+            <ul>
+                <ul class="General">
+                    <li class="text-color category">
+                        <p>General</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('status-li', 'status-tab-template', 'main')" id="status-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Status</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('console-li', 'console-tab-template', 'main')" id="console-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Console</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('player-list-li', 'player-list-tab-template', 'main')" id="player-list-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Player List</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('whitelist-li', 'whitelist-tab-template', 'main')" id="whitelist-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Whitelist</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('file-manager-li', 'file-manager-tab-template', 'main')" id="file-manager-li">
+                        <img src="/img/computer-icon.png">
+                        <p>File Manager</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('schedules-li', 'schedules-tab-template', 'main')" id="schedules-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Schedules</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('backups-li', 'backups-tab-template', 'main')" id="backups-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Backups</p>
+                    </li>
+                </ul>
+                <ul class="minecraft-management">
+                    <li class="text-color category">
+                        <p>Minecraft Management</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('worlds-li', 'worlds-tab-template', 'main')" id="worlds-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Worlds</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('server-properties-li', 'server-properties-tab-template', 'main')" id="server-properties-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Server Properties</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('version-li', 'version-tab-template', 'main')" id="version-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Version</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('plugins-li', 'plugins-tab-template', 'main')" id="plugins-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Plugins</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('mods-li', 'mods-tab-template', 'main')" id="mods-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Mods</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('modpacks-li', 'modpacks-tab-template', 'main')" id="modpacks-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Modpacks</p>
+                    </li>
+                </ul>
+                <ul class="server-settings">
+                    <li class="text-color category">
+                        <p>Server Settings</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('general-settings-li', 'general-settings-tab-template', 'main')" id="general-settings-li">
+                        <img src="/img/computer-icon.png">
+                        <p>General Settings</p>
+                    </li>
+                    <li class="text-color button" onclick="LiSettingsButton('startup-settings-li', 'startup-settings-tab-template', 'main')" id="startup-settings-li">
+                        <img src="/img/computer-icon.png">
+                        <p>Startup Settings</p>
+                    </li>
+                </ul>
+            </ul>
         </nav>
-        <main class="background-color">
+        <main class="background-color" id="main">
         </main>
     </div>
-
 </body>
+<template id="status-tab-template">
+    <p class="text-color">Status</p>
+</template>
+<template id="console-tab-template">
+    <div class="background-color console-div text-color">
+        <p class="text-color">Console</p>
+        <p class="background-primary console-log text-color" id="console-log">
+            This is the console anything that happens will be displayed here.
+            <!-- Console log will be dynamically added here -->
+        </p>
+        <div class="background-primary console-input-div">
+            <form onsubmit="ConsoleInput(); return false">           
+                <input type="text" class="background-primary console-input text-color" id="console-input" placeholder="Enter command here">
+            </form>
+            <button class="input-button background-secondary text-color" onclick="ConsoleInput()">Send</button>
+        </div>
+    </div>
+</template>
+<template id="player-list-tab-template">
+    <p class="text-color">Player List</p>
+</template>
+<template id="whitelist-tab-template">
+    <p class="text-color">Whitelist</p>
+</template>
+<template id="file-manager-tab-template">
+    <p class="text-color">File Manager</p>
+</template>
+<template id="schedules-tab-template">
+    <p class="text-color">Schedules</p>
+</template>
+<template id="backups-tab-template">
+    <p class="text-color">Backups</p>
+</template>
+<template id="worlds-tab-template">
+    <p class="text-color">Worlds</p>
+</template>
+<template id="server-properties-tab-template">
+    <p class="text-color">Server Properties</p>
+</template>
+<template id="version-tab-template">
+    <p class="text-color">Version</p>
+</template>
+<template id="plugins-tab-template">
+    <p class="text-color">Plugins</p>
+</template>
+<template id="mods-tab-template">
+    <p class="text-color">Mods</p>
+</template>
+<template id="modpacks-tab-template">
+    <p class="text-color">Modpacks</p>
+</template>
+<template id="general-settings-tab-template">
+    <p class="text-color">General Settings</p>
+</template>
+<template id="startup-settings-tab-template">
+    <p class="text-color">Startup Settings</p>
+</template>
 </html>
