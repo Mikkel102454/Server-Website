@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Your server</title>
     <link rel="stylesheet" href="/css-files/styling-config/color-palette.css">
     <link rel="stylesheet" href="/css-files/styling-config/size-presets.css">
     <link rel="stylesheet" href="/css-files/css-minecraft-hosting/generic-minecraft-server.css">
@@ -96,15 +96,16 @@
             </ul>
         </nav>
         <main class="background-color" id="main">
+            <!-- Tab content will be dynamically added here -->
         </main>
     </div>
 </body>
 <template id="status-tab-template">
-    <p class="text-color">Status</p>
+    <p class="text-color menu-header">Status</p>
 </template>
 <template id="console-tab-template">
+    <p class="text-color console-header menu-header">Console</p>
     <div class="background-color console-div text-color">
-        <p class="text-color">Console</p>
         <p class="background-primary console-log text-color" id="console-log">
             This is the console anything that happens will be displayed here.
             <!-- Console log will be dynamically added here -->
@@ -118,42 +119,57 @@
     </div>
 </template>
 <template id="player-list-tab-template">
-    <p class="text-color">Player List</p>
+    <p class="text-color menu-header">Player List</p>
+    <ul class="player-list" id="player-list">
+        <!-- Player list will be dynamically added here -->
+    </ul>
 </template>
 <template id="whitelist-tab-template">
-    <p class="text-color">Whitelist</p>
+    <p class="text-color menu-header">Whitelist</p>
 </template>
 <template id="file-manager-tab-template">
-    <p class="text-color">File Manager</p>
+    <p class="text-color menu-header">File Manager</p>
 </template>
 <template id="schedules-tab-template">
-    <p class="text-color">Schedules</p>
+    <p class="text-color menu-header">Schedules</p>
 </template>
 <template id="backups-tab-template">
-    <p class="text-color">Backups</p>
+    <p class="text-color menu-header">Backups</p>
 </template>
 <template id="worlds-tab-template">
-    <p class="text-color">Worlds</p>
+    <p class="text-color menu-header">Worlds</p>
 </template>
 <template id="server-properties-tab-template">
-    <p class="text-color">Server Properties</p>
+    <p class="text-color menu-header">Server Properties</p>
 </template>
 <template id="version-tab-template">
-    <p class="text-color">Version</p>
+    <p class="text-color menu-header">Version</p>
 </template>
 <template id="plugins-tab-template">
-    <p class="text-color">Plugins</p>
+    <p class="text-color menu-header">Plugins</p>
 </template>
 <template id="mods-tab-template">
-    <p class="text-color">Mods</p>
+    <p class="text-color menu-header">Mods</p>
 </template>
 <template id="modpacks-tab-template">
-    <p class="text-color">Modpacks</p>
+    <p class="text-color menu-header">Modpacks</p>
 </template>
 <template id="general-settings-tab-template">
-    <p class="text-color">General Settings</p>
+    <p class="text-color menu-header">General Settings</p>
 </template>
 <template id="startup-settings-tab-template">
-    <p class="text-color">Startup Settings</p>
+    <p class="text-color menu-header">Startup Settings</p>
+</template>
+
+<template>
+    <li class="text-color" id="player-li">
+        <div  id="player" class="player background-primary">
+            <img src="/img/alex-head.png" alt="#Error" class="player-head">
+            <p id="player-name">#Error</p>
+            <button class="op-player-button player-button background-secondary text-color" onclick="OpPlayer()">OP</button>
+            <button class="deop-player-button player-button background-secondary text-color" onclick="OpPlayer()">Deop</button>
+            <button class="ban-player-button player-button background-secondary text-color" onclick="OpPlayer()">Ban</button>
+        </div>
+    </li>
 </template>
 </html>

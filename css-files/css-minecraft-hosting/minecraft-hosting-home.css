@@ -9,6 +9,7 @@ main {
     flex-direction: column;
     margin: 0;
     align-content: center;
+    align-items: center;
 }
 main .catagory-header{
     width: 100%;
@@ -20,12 +21,14 @@ main .catagory-header{
 }
 main ul {
     list-style: none;
-    width: 100%;
+    width: 70%;
     padding: 0;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 .container {
     transition: 0.2s;
@@ -69,4 +72,12 @@ header{
     height: 7vh;
     width: 100vw;
     align-items: center;
+}
+
+.example-player-count{
+    font-size: 14px !important;
+}
+
+.new-server-img{
+    filter: invert(0.5);
 }
