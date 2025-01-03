@@ -10,6 +10,7 @@
     <script src="/js-files/auth.js"></script>
     <script src="/js-files/general.js"></script>   
     <script src="/js-files/js-minecraft-hosting/generic-minecraft-server.js"></script> 
+
 </head>
 <body class="dark-mode background-color">
     <header class="background-primary">
@@ -18,10 +19,10 @@
     <div class="main-window">
         <nav class="background-accent">
             <ul>
+                <div class="category">
+                    <p class="text-color">General</p>
+                </div>
                 <ul class="General">
-                    <li class="text-color category">
-                        <p>General</p>
-                    </li>
                     <li class="text-color button" onclick="LiSettingsButton('status-li', 'status-tab-template', 'main')" id="status-li">
                         <img src="/img/computer-icon.png">
                         <p>Status</p>
@@ -30,11 +31,11 @@
                         <img src="/img/computer-icon.png">
                         <p>Console</p>
                     </li>
-                    <li class="text-color button" onclick="LiSettingsButton('player-list-li', 'player-list-tab-template', 'main')" id="player-list-li">
+                    <li class="text-color button" onclick="LiSettingsButton('player-list-li', 'player-list-tab-template', 'main'), LoadPlayerList()" id="player-list-li">
                         <img src="/img/computer-icon.png">
                         <p>Player List</p>
                     </li>
-                    <li class="text-color button" onclick="LiSettingsButton('whitelist-li', 'whitelist-tab-template', 'main')" id="whitelist-li">
+                    <li class="text-color button" onclick="LiSettingsButton('whitelist-li', 'whitelist-tab-template', 'main'), LoadWhiteList()" id="whitelist-li">
                         <img src="/img/computer-icon.png">
                         <p>Whitelist</p>
                     </li>
@@ -51,10 +52,10 @@
                         <p>Backups</p>
                     </li>
                 </ul>
+                <div class="category">
+                    <p class="text-color">Management</p>
+                </div>
                 <ul class="minecraft-management">
-                    <li class="text-color category">
-                        <p>Minecraft Management</p>
-                    </li>
                     <li class="text-color button" onclick="LiSettingsButton('worlds-li', 'worlds-tab-template', 'main')" id="worlds-li">
                         <img src="/img/computer-icon.png">
                         <p>Worlds</p>
@@ -80,10 +81,10 @@
                         <p>Modpacks</p>
                     </li>
                 </ul>
+                <div class="category">
+                    <p class="text-color">Server Settings</p>
+                </div>
                 <ul class="server-settings">
-                    <li class="text-color category">
-                        <p>Server Settings</p>
-                    </li>
                     <li class="text-color button" onclick="LiSettingsButton('general-settings-li', 'general-settings-tab-template', 'main')" id="general-settings-li">
                         <img src="/img/computer-icon.png">
                         <p>General Settings</p>
@@ -120,12 +121,57 @@
 </template>
 <template id="player-list-tab-template">
     <p class="text-color menu-header">Player List</p>
+    <div class="refresh-total-players-div">
+        <img src="/img/refresh.png" class="refresh-button text-color" onclick="LoadPlayerList()">
+        <p class="text-color total-players" id="total-players">Total players: 0</p>
+    </div>
+    <div class="searchbar-div">
+        <form onsubmit="LoadPlayerList(); return false" class="searchbar-form">
+            <input type="text" class="searchbar background-primary text-color" id="searchbar" placeholder="Search for player">
+        </form>
+        <div class="search-button-div" onclick="LoadPlayerList()">
+            <img src="/img/search-icon.png" alt="#Error" class="search-icon text-color"">
+        </div>
+
+    </div>
     <ul class="player-list" id="player-list">
         <!-- Player list will be dynamically added here -->
     </ul>
 </template>
 <template id="whitelist-tab-template">
     <p class="text-color menu-header">Whitelist</p>
+    <div class="whitelist-main-div">
+        <div class="whitelist-panel background-primary">
+            <div class="whitelist-on-off-div">
+                <button class="whitelist-on-button background-secondary" onclick="WhitelistOn()">Whitelist on</button>
+                <button class="whitelist-off-button background-secondary" onclick="WhitelistOff()">Whitelist off</button>
+            </div>
+            <input type="text" class="whitelist-player-input background-primary text-color" id="whitelist-player-input" placeholder="Username">
+            <div class="whitelist-add-remove-div">
+                <button class="whitelist-player-button background-secondary" onclick="WhitelistSpecificPlayer()">Whitelist</button>
+                <button class="unwhitelist-specific-player-button background-secondary" onclick="UnwhitelistSpecificPlayer()">Unwhitelist</button>
+            </div>
+        </div>
+        <div class="whitelist-list-div">
+            <div class="refresh-total-players-div">
+                <img src="/img/refresh.png" class="refresh-button text-color" onclick="LoadWhiteList()">
+                <p class="text-color total-players" id="total-players">Total Whitelisted players: 0</p>
+            </div>
+            <div class="searchbar-div">
+                <form onsubmit="LoadWhiteList(); return false" class="searchbar-form">
+                    <input type="text" class="searchbar background-primary text-color" id="whitelist-searchbar" placeholder="Search whitelisted players">
+                </form>
+                <div class="search-button-div" onclick="LoadWhiteList()">
+                    <img src="/img/search-icon.png" alt="#Error" class="search-icon text-color"">
+                </div>
+        
+            </div>
+            <ul class="player-list" id="player-list">
+                <!-- Whitelist will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+
 </template>
 <template id="file-manager-tab-template">
     <p class="text-color menu-header">File Manager</p>
@@ -161,15 +207,32 @@
     <p class="text-color menu-header">Startup Settings</p>
 </template>
 
-<template>
+<template id="player-template">
     <li class="text-color" id="player-li">
         <div  id="player" class="player background-primary">
             <img src="/img/alex-head.png" alt="#Error" class="player-head">
-            <p id="player-name">#Error</p>
-            <button class="op-player-button player-button background-secondary text-color" onclick="OpPlayer()">OP</button>
-            <button class="deop-player-button player-button background-secondary text-color" onclick="OpPlayer()">Deop</button>
-            <button class="ban-player-button player-button background-secondary text-color" onclick="OpPlayer()">Ban</button>
+            <p id="player-name" class="player-name">#Error</p>
+            <button class="op-player-button player-button background-secondary text-color" onclick="OpPlayer(event)">OP</button>
+            <button class="deop-player-button player-button background-secondary text-color" onclick="DeopPlayer(event)">Deop</button>
+            <button class="ban-player-button player-button background-secondary text-color" onclick="KickPlayer(event)">Kick</button>
+            <button class="ban-player-button player-button background-secondary text-color" onclick="BanPlayer(event)">Ban</button>
         </div>
+    </li>
+</template>
+<template id="player-whitelist-template">
+    <li class="text-color" id="player-li">
+        <div  id="player" class="player background-primary">
+            <img src="/img/alex-head.png" alt="#Error" class="player-head">
+            <p id="player-name" class="player-name">#Error</p>
+            <button class="op-player-button unwhitelist-player-button player-button background-secondary text-color" onclick="UnWhitelistPlayer(event)">Unwhitelist</button>
+            <button class="ban-player-button player-button background-secondary text-color" onclick="KickPlayer(event)">Kick</button>
+            <button class="ban-player-button player-button background-secondary text-color" onclick="BanPlayer(event)">Ban</button>
+        </div>
+    </li>
+</template>
+<template id="no-player-template">
+    <li class="text-color no-player" id="no-player">
+        <p class="text-color no-player-text">No players found!</p>
     </li>
 </template>
 </html>

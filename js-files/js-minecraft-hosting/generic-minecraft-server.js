@@ -35,31 +35,141 @@ function ConsoleInput(){
 }
 
 function CommandSend(command){
-    console.log("Send:" + command + " to Console")
+    console.log('Send: "' + command + '" to Console')
     //Her kommer alle de commands der skal sendes ind til consolen fra diverse steder, inklusiv user input, så ikke alle commands kommer til at være gyldige
 
 }
 
-function OpPlayer(event){
-    player = event.target.parentNode.parentNode.querySelector(".player-name").innerHTML;
+function OpPlayer(button){
+    player = button.target.parentNode.parentNode.querySelector(".player-name").innerHTML;
     CommandSend("op " + player);
     //Sender command til CommandSend funktionen om at op en bestemt spiller
 }
 
-function DeopPlayer(event){
-    player = event.target.parentNode.parentNode.querySelector(".player-name").innerHTML;
+function DeopPlayer(button){
+    player = button.target.parentNode.parentNode.querySelector(".player-name").innerHTML;
     CommandSend("deop " + player);
     //Sender command til CommandSend funktionen om at deop en bestemt spiller
 }
 
-function BanPlayer(event){
-    player = event.target.parentNode.parentNode.querySelector(".player-name").innerHTML;
+function BanPlayer(button){
+    player = button.target.parentNode.parentNode.querySelector(".player-name").innerHTML;
     CommandSend("ban " + player);
+    try {
+        LoadPlayerList()
+    }
+    catch(e){
+        console.log("Player list not loaded")
+    }
     //Sender command til CommandSend funktionen om at banne en bestemt spiller
 }
+function KickPlayer(button){
+    player = button.target.parentNode.parentNode.querySelector(".player-name").innerHTML;
+    CommandSend("kick " + player);
+    try {
+        LoadPlayerList()
+    }
+    catch(e){
+        console.log("Player list not loaded")
+    }
+    //Sender command til CommandSend funktionen om at kicke en bestemt spiller
+}
 
-function ConsoleLogAdd(newline){
+function UnWhitelistPlayer(button){
+    player = button.target.parentNode.parentNode.querySelector(".player-name").innerHTML;
+    CommandSend("whitelist remove " + player);
+    LoadWhiteList()
+    //Sender command til CommandSend funktionen om at fjerne whitelist fra en bestemt spiller
+}
+
+function WhitelistOn(){
+    CommandSend("whitelist on");
+}
+
+function WhitelistOff(){
+    CommandSend("whitelist off");
+}
+function WhitelistSpecificPlayer(){
+    player = document.getElementById("whitelist-player-input").value;
+    CommandSend("whitelist add " + player);
+    LoadWhiteList()
+}
+
+function UnwhitelistSpecificPlayer(){
+    player = document.getElementById("whitelist-player-input").value;
+    CommandSend("whitelist add " + player);
+    LoadWhiteList()
+}
+
+
+
+
+function ConsoleLogAdd(newline){    
     log = document.getElementById("console-log");
     log.innerHTML += "<br>" + newline;
     //Skriver et input du giver (variablen newline) til consolen inde på hjemmesiden
+}
+
+function LoadPlayerList(){
+    var playerjson = JSON.stringify({
+        "names": ["Dopelegend", "xinus_"]
+    });
+    //playerjson skal være et JSON objekt, du sender med online spillere
+    inputbox = document.getElementById("searchbar");
+    input = inputbox.value.toLowerCase();
+    playerjson = JSON.parse(playerjson)
+    const playerTemplate = document.getElementById("player-template");
+    const playerlist = document.getElementById("player-list");
+    const noPlayerTemplate = document.getElementById("no-player-template");
+    playerlist.innerHTML = "";
+    playerarray = playerjson.names;
+    totalPlayers = document.getElementById("total-players")
+    totalPlayers.innerHTML = "Total Players: " + playerarray.length;
+    playerarray.forEach(player => {
+        if(player.toLowerCase().includes(input.trim())){
+            templateclone = playerTemplate.content.cloneNode(true);
+            templateclone.querySelector(".player-name").innerHTML = player;
+            templateclone.querySelector(".player-head").src = "https://minotar.net/helm/" + player + ".png"; 
+            playerlist.appendChild(templateclone);
+            foundplayer = true;
+        }       
+    })
+    if(!foundplayer){
+        templateclone = noPlayerTemplate.content.cloneNode(true);
+        playerlist.appendChild(templateclone);
+    }
+    foundplayer = false;
+}
+
+function LoadWhiteList(){
+    var playerwhitelistjson = JSON.stringify({
+        "names": ["CraftyHunter", "EpicGamer", "EnderLord", "DiamondKing", "PixelMaster", "StealthNinja", "ShadowWalker",
+  "DarkAssassin", "IronKnight", "FireDragon", "MegaWarlord", "StormBreaker", "GoldenMage", "LunarKnight", "GalaxyWarrior", "TitanCrusher", "SwiftArrow",
+  "RedWolf", "RogueWarrior"]
+    });
+    //playerjson skal være et JSON objekt, du sender med whitelistede spillere
+    inputbox = document.getElementById("whitelist-searchbar");
+    input = inputbox.value.toLowerCase();
+    playerwhitelistjson = JSON.parse(playerwhitelistjson)
+    const playerTemplate = document.getElementById("player-whitelist-template");
+    const playerlist = document.getElementById("player-list");
+    const noPlayerTemplate = document.getElementById("no-player-template");
+    playerlist.innerHTML = "";
+    playerwhitelistarray = playerwhitelistjson.names;
+    totalPlayers = document.getElementById("total-players")
+    totalPlayers.innerHTML = "Total Whitelisted Players: " + playerwhitelistarray.length;
+    playerwhitelistarray.forEach(player => {
+        if(player.toLowerCase().includes(input.trim())){
+            templateclone = playerTemplate.content.cloneNode(true);
+            templateclone.querySelector(".player-name").innerHTML = player;
+            templateclone.querySelector(".player-head").src = "https://minotar.net/helm/" + player + ".png"; 
+            playerlist.appendChild(templateclone);
+            foundplayer = true;
+        }       
+    })
+    if(!foundplayer){
+        templateclone = noPlayerTemplate.content.cloneNode(true);
+        playerlist.appendChild(templateclone);
+    }
+    foundplayer = false;
 }
